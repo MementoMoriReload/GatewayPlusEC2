@@ -19,7 +19,6 @@ async function leerRespuesta(res: Response): Promise<string>{
 }
 
 export default function App() {
-  const [original, setOriginal] = useState("Cargando...");
   const [texto, setTexto] = useState("Cargando...");
   const [editando, setEditando] = useState(false);
   const [borrador, setBorrador] = useState("");
@@ -29,7 +28,7 @@ export default function App() {
   const cargar = async () => {
     setError("");
     try {
-      setTexto(await leerRespuesta(await fetch('${API}/saludo')));
+      setTexto(await leerRespuesta(await fetch(`${API}/saludo`)));
 
     } catch (e) {
       setError((e as Error).message);
@@ -50,7 +49,7 @@ export default function App() {
     setGuardando(true);
     setError("");
     try {
-      const res = await fetch('${API}/saludo', {
+      const res = await fetch(`${API}/saludo`, {
         method: "PUT",
         headers: {"Content-Type": "text/plain; charset=utf-8" },
         body: borrador,
